@@ -1,5 +1,6 @@
 from tkinter import StringVar, Tk, ttk
 from tkinter.messagebox import showinfo
+import routes
 
 
 class App(Tk):
@@ -30,7 +31,7 @@ class App(Tk):
 
     def Submit(self):
         showinfo(title='Conformation',
-                 message=f'Employee {self.idEntry.get()} was Submitted')
+                 message=f'Employee {routes.read(self.idEntry.get())} was Submitted')
 
 
 if __name__ == '__main__':

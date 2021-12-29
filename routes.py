@@ -19,4 +19,8 @@ employee = Employee(
     lastName='George'
 )
 
-recreate_database()
+
+def read(userId):
+    r = s.query(Employee).filter_by(id=userId).first()
+    print(r.firstName + ' ' + r.lastName)
+    return r.firstName
