@@ -1,6 +1,7 @@
 from tkinter import StringVar, Tk, ttk
 from tkinter.messagebox import showinfo
 import routes
+from sqlalchemy.exc import InternalError, DataError
 
 
 class App(Tk):
@@ -30,8 +31,21 @@ class App(Tk):
         self.bind('<Return>', lambda event: self.Submit())
 
     def Submit(self):
-        showinfo(title='Conformation',
-                 message=f'Employee {routes.read(self.idEntry.get())} was Submitted')
+        try:
+            showinfo(title='Conformation',
+                     message=f'Employee {routes.read(self.idEntry.get())} was Submitted')
+            self.idInput.destroy()
+            self.submit.destroy()
+            self.label['text'] = 'Please Clock in'
+        except AttributeError:
+            showinfo(
+                title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
+        except InternalError:
+            showinfo(
+                title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
+        except DataError:
+            showinfo(
+                title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
 
 
 if __name__ == '__main__':
