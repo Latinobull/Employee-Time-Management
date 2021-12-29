@@ -2,6 +2,7 @@ from tkinter import StringVar, Tk, ttk
 from tkinter.messagebox import showinfo
 import routes
 from sqlalchemy.exc import InternalError, DataError
+import time
 
 
 class App(Tk):
@@ -31,18 +32,38 @@ class App(Tk):
         self.bind('<Return>', lambda event: self.Submit())
 
     def Submit(self):
+
         try:
             showinfo(title='Conformation',
                      message=f'Employee {routes.read(self.idEntry.get())} was Submitted')
             self.idInput.destroy()
             self.submit.destroy()
-            self.label['text'] = 'Please Clock in'
+            # Clock in Entry
+            self.clockIn = ttk.Button(self, text='Clock in', width=30)
+            self.clockIn.pack()
+            # Break out entry
+            self.breakOut = ttk.Button(self, text='Break Out', width=30)
+            self.breakOut.pack()
+            # Break in entry
+            self.breakIn = ttk.Button(self, text='Break In', width=30)
+            self.breakIn.pack()
+            # Clock out Entry
+            self.clockOut = ttk.Button(self, text='Clock Out', width=30)
+            self.clockOut.pack()
+
+            t = time.localtime()
+            fullTime = time.strftime('%H:%M:%S', t)
+            self.label['text'] = f'Please Clock in {fullTime}'
+            time.sleep(1)
+
         except AttributeError:
             showinfo(
                 title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
+
         except InternalError:
             showinfo(
                 title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
+
         except DataError:
             showinfo(
                 title='Error', message=f'There is no user with the ID {self.idEntry.get()}')
