@@ -31,6 +31,13 @@ class App(Tk):
 
         self.bind('<Return>', lambda event: self.Submit())
 
+    def clock(self):
+
+        t = time.localtime()
+        fullTime = time.strftime('%H:%M:%S', t)
+        self.label['text'] = f'Please Clock in {fullTime}'
+        self.label.after(1000, self.clock)
+
     def Submit(self):
 
         try:
@@ -50,11 +57,7 @@ class App(Tk):
             # Clock out Entry
             self.clockOut = ttk.Button(self, text='Clock Out', width=30)
             self.clockOut.pack()
-
-            t = time.localtime()
-            fullTime = time.strftime('%H:%M:%S', t)
-            self.label['text'] = f'Please Clock in {fullTime}'
-            time.sleep(1)
+            self.clock()
 
         except AttributeError:
             showinfo(
