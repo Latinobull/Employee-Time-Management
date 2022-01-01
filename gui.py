@@ -39,16 +39,32 @@ class App(Tk):
         self.label.after(1000, self.clock)
 
     def clockInFunction(self):
-        print('I have been clocked in')
+        t = time.localtime()
+        currentTime = time.strftime('%H:%M:%S', t)
+        showinfo(title='Confirmation',
+                 message=f'You have clocked in at {currentTime}')
+        self.destroy()
 
     def clockOutFunction(self):
-        print('I have been clocked out')
+        t = time.localtime()
+        currentTime = time.strftime('%H:%M:%S', t)
+        showinfo(title='Confirmation',
+                 message=f'You have clocked it at {currentTime}')
+        self.destroy()
 
     def breakInFunction(self):
-        print('I have been clocked in for break ')
+        t = time.localtime()
+        currentTime = time.strftime('%H:%M:%S', t)
+        showinfo(title='Confirmation',
+                 message=f'You have clocked in for break at {currentTime}')
+        self.destroy()
 
     def breakOutFunction(self):
-        print('I have been clocked out for break')
+        t = time.localtime()
+        currentTime = time.strftime('%H:%M:%S', t)
+        showinfo(title='Confirmation',
+                 message=f'You have clocked out for break at {currentTime}')
+        self.destroy()
 
     def Submit(self):
 
