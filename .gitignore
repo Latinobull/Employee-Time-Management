@@ -3,4 +3,4 @@ storevenv
 .env
 __pycache__
 alembic/versions
-alembic.ini
+alembic.ini 
