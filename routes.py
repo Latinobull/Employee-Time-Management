@@ -13,14 +13,26 @@ def recreate_database():
     Base.metadata.create_all(engine)
 
 
-employee = Employee(
-    id=1866219,
-    firstName='Donnahue',
-    lastName='George'
-)
+def fakeEmployee():
+    employee = Employee(
+        id=1866219,
+        firstName='Donnahue',
+        lastName='George'
+    )
+    s.add(employee)
+    s.commit()
 
 
 def read(userId):
     r = s.query(Employee).filter_by(id=userId).first()
     print(r.firstName + ' ' + r.lastName)
+    s.commit()
     return r.firstName
+
+
+def updateClockIn(userId, currentTime):
+    read = s.query(Employee).filter_by(id=userId)
+    read.update(
+        {Employee.startShift: currentTime})
+    s.commit()
+    print(read)

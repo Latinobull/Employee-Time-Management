@@ -31,46 +31,41 @@ class App(Tk):
 
         self.bind('<Return>', lambda event: self.Submit())
 
+    # Displaying BUTTONS FOR BREAK
     def clock(self):
 
         t = time.localtime()
-        fullTime = time.strftime('%H:%M:%S', t)
-        self.label['text'] = f'Please Clock in {fullTime}'
+        self.currentTime = time.strftime('%H:%M:%S', t)
+        self.label['text'] = f'Please Clock in {self.currentTime}'
         self.label.after(1000, self.clock)
 
     def clockInFunction(self):
-        t = time.localtime()
-        currentTime = time.strftime('%H:%M:%S', t)
         showinfo(title='Confirmation',
-                 message=f'You have clocked in at {currentTime}')
+                 message=f'You have clocked in at {self.currentTime}')
+        routes.updateClockIn(userId, self.currentTime)
         self.destroy()
 
     def clockOutFunction(self):
-        t = time.localtime()
-        currentTime = time.strftime('%H:%M:%S', t)
         showinfo(title='Confirmation',
-                 message=f'You have clocked it at {currentTime}')
+                 message=f'You have clocked it at {self.currentTime}')
         self.destroy()
 
     def breakInFunction(self):
-        t = time.localtime()
-        currentTime = time.strftime('%H:%M:%S', t)
         showinfo(title='Confirmation',
-                 message=f'You have clocked in for break at {currentTime}')
+                 message=f'You have clocked in for break at {self.currentTime}')
         self.destroy()
 
     def breakOutFunction(self):
-        t = time.localtime()
-        currentTime = time.strftime('%H:%M:%S', t)
         showinfo(title='Confirmation',
-                 message=f'You have clocked out for break at {currentTime}')
+                 message=f'You have clocked out for break at {self.currentTime}')
         self.destroy()
 
     def Submit(self):
-
+        global userId
+        userId = self.idEntry.get()
         try:
             showinfo(title='Conformation',
-                     message=f'Employee {routes.read(self.idEntry.get())} was Submitted')
+                     message=f'Employee {routes.read(userId)} was Submitted')
             self.idInput.destroy()
             self.submit.destroy()
             # Clock in Entry
