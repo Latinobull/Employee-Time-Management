@@ -36,3 +36,27 @@ def updateClockIn(userId, currentTime):
         {Employee.startShift: currentTime})
     s.commit()
     print(read)
+
+
+def updateClockOut(userId, currentTime):
+    read = s.query(Employee).filter_by(id=userId)
+    read.update(
+        {Employee.endShift: currentTime})
+    s.commit()
+    print(read)
+
+
+def updateBreakOut(userId, currentTime):
+    read = s.query(Employee).filter_by(id=userId)
+    read.update(
+        {Employee.startBreak: currentTime})
+    s.commit()
+    print(read)
+
+
+def updateBreakIn(userId, currentTime):
+    read = s.query(Employee).filter_by(id=userId)
+    read.update(
+        {Employee.endBreak: currentTime})
+    s.commit()
+    print(read)

@@ -35,7 +35,7 @@ class App(Tk):
     def clock(self):
 
         t = time.localtime()
-        self.currentTime = time.strftime('%H:%M:%S', t)
+        self.currentTime = time.strftime('%I:%M:%S %p', t)
         self.label['text'] = f'Please Clock in {self.currentTime}'
         self.label.after(1000, self.clock)
 
@@ -48,16 +48,19 @@ class App(Tk):
     def clockOutFunction(self):
         showinfo(title='Confirmation',
                  message=f'You have clocked it at {self.currentTime}')
+        routes.updateClockOut(userId, self.currentTime)
         self.destroy()
 
     def breakInFunction(self):
         showinfo(title='Confirmation',
                  message=f'You have clocked in for break at {self.currentTime}')
+        routes.updateBreakIn(userId, self.currentTime)
         self.destroy()
 
     def breakOutFunction(self):
         showinfo(title='Confirmation',
                  message=f'You have clocked out for break at {self.currentTime}')
+        routes.updateBreakOut(userId, self.currentTime)
         self.destroy()
 
     def Submit(self):
