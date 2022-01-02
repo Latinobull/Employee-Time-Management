@@ -37,7 +37,7 @@ def read(userId):
 def updateClockIn(userId, currentTime):
     read = s.query(Employee).filter_by(id=userId)
     read.update(
-        {Employee.startShift: currentTime})
+        {Employee.startShift: str(currentTime)})
     s.commit()
     print(read)
 
@@ -64,7 +64,3 @@ def updateBreakIn(userId, currentTime):
         {Employee.endBreak: currentTime})
     s.commit()
     print(read)
-
-
-recreate_database()
-fakeEmployees()

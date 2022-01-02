@@ -36,31 +36,32 @@ class App(Tk):
 
         t = time.localtime()
         self.currentTime = time.strftime('%I:%M:%S %p', t)
+        self.clockTime = time.strftime('%I:%M%p', t)
         self.label['text'] = f'Please Clock in {self.currentTime}'
         self.label.after(1000, self.clock)
 
     def clockInFunction(self):
         showinfo(title='Confirmation',
-                 message=f'You have clocked in at {self.currentTime}')
-        routes.updateClockIn(userId, self.currentTime)
+                 message=f'You have clocked in at {self.clockTime}')
+        routes.updateClockIn(userId, self.clockTime)
         self.destroy()
 
     def clockOutFunction(self):
         showinfo(title='Confirmation',
-                 message=f'You have clocked it at {self.currentTime}')
-        routes.updateClockOut(userId, self.currentTime)
+                 message=f'You have clocked it at {self.clockTime}')
+        routes.updateClockOut(userId, self.clockTime)
         self.destroy()
 
     def breakInFunction(self):
         showinfo(title='Confirmation',
-                 message=f'You have clocked in for break at {self.currentTime}')
-        routes.updateBreakIn(userId, self.currentTime)
+                 message=f'You have clocked in for break at {self.clockTime}')
+        routes.updateBreakIn(userId, self.clockTime)
         self.destroy()
 
     def breakOutFunction(self):
         showinfo(title='Confirmation',
-                 message=f'You have clocked out for break at {self.currentTime}')
-        routes.updateBreakOut(userId, self.currentTime)
+                 message=f'You have clocked out for break at {self.clockTime}')
+        routes.updateBreakOut(userId, self.clockTime)
         self.destroy()
 
     def Submit(self):
