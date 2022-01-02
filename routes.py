@@ -13,13 +13,17 @@ def recreate_database():
     Base.metadata.create_all(engine)
 
 
-def fakeEmployee():
-    employee = Employee(
+def fakeEmployees():
+    employees = [Employee(
         id=1866219,
         firstName='Donnahue',
         lastName='George'
-    )
-    s.add(employee)
+    ), Employee(id=1234567,
+                firstName='Test',
+                lastName='Employee')]
+    for employee in employees:
+        s.add(employee)
+        print(employee)
     s.commit()
 
 
@@ -60,3 +64,7 @@ def updateBreakIn(userId, currentTime):
         {Employee.endBreak: currentTime})
     s.commit()
     print(read)
+
+
+recreate_database()
+fakeEmployees()
