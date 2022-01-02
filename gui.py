@@ -1,8 +1,10 @@
 from tkinter import StringVar, Tk, ttk
 from tkinter.messagebox import showinfo
 import routes
-from sqlalchemy.exc import InternalError, DataError
+from sqlalchemy.exc import DataError
 import time
+from datetime import date
+import calendar
 
 
 class App(Tk):
@@ -33,11 +35,12 @@ class App(Tk):
 
     # Displaying BUTTONS FOR BREAK
     def clock(self):
-
+        currentDate = date.today()
+        showDate = calendar.day_name[currentDate.weekday()]
         t = time.localtime()
         self.currentTime = time.strftime('%I:%M:%S %p', t)
         self.clockTime = time.strftime('%I:%M%p', t)
-        self.label['text'] = f'Please Clock in {self.currentTime}'
+        self.label['text'] = f' Today is {showDate} Please Clock in {self.currentTime}'
         self.label.after(1000, self.clock)
 
     def clockInFunction(self):
