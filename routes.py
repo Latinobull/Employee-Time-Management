@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import DATABASE_URI
 from model import Base, Employee
+from flask_seeder import Seeder, Faker, generator
 
 engine = create_engine(DATABASE_URI)
 Session = sessionmaker(bind=engine)
@@ -25,6 +26,22 @@ def fakeEmployees():
         s.add(employee)
         print(employee)
     s.commit()
+
+
+class Seed(Seeder):
+    def run():
+        faker = Faker(
+            cls=Employee,
+            init={
+                'id': generator.Integer(start=1000000, end=2020000),
+                'firstName': generator.Name(),
+                'lastName': generator.Name()
+            })
+        for user in faker.create(10):
+            print(f'Adding user {user}')
+            s.add(user)
+            s.commit()
+    run()
 
 
 def read(userId):
