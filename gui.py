@@ -40,7 +40,8 @@ class App(Tk):
         t = time.localtime()
         self.currentTime = time.strftime('%I:%M:%S %p', t)
         self.clockTime = time.strftime('%I:%M%p', t)
-        self.label['text'] = f' Today is {showDate} Please Clock in {self.currentTime}'
+        self.label['text'] = f' Today is {showDate} \n Please Clock in {self.currentTime}'
+        self.label.configure(justify='center')
         self.label.after(1000, self.clock)
 
     def clockInFunction(self):

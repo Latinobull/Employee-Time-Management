@@ -41,7 +41,6 @@ class Seed(Seeder):
             print(f'Adding user {user}')
             s.add(user)
             s.commit()
-    run()
 
 
 def read(userId):
